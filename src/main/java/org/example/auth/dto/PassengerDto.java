@@ -1,9 +1,7 @@
 package org.example.auth.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.example.auth.models.Passenger;
 
 import java.util.Date;
 
@@ -11,6 +9,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PassengerDto {
     private Long id;
     private String email;
@@ -18,4 +17,13 @@ public class PassengerDto {
     private String phone;
     private String password;
     private Date CreatedAt;
+    public static PassengerDto from(Passenger passenger){
+        return PassengerDto.builder()
+                .id(passenger.getId())
+                .email(passenger.getEmail())
+                .name(passenger.getName())
+                .phone(passenger.getPhone())
+                .password(passenger.getPassword())
+                .build();
+    }
 }

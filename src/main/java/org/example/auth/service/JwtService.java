@@ -29,7 +29,7 @@ public class JwtService implements CommandLineRunner {
      *
      * @return String
      */
-    private String createToken(Map<String, Object> payload, String username) {
+    public String createToken(Map<String, Object> payload, String username) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiry * 1000L);
         SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
@@ -40,6 +40,10 @@ public class JwtService implements CommandLineRunner {
                 .subject(username)
                 .signWith(key)
                 .compact();
+    }
+
+    public String createToken(String email){
+        return createToken(new HashMap<>(),email);
     }
 
     private Key getSignKey() {
